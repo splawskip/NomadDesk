@@ -35,3 +35,16 @@ p, h1, h2, h3, h4, h5, h6 {
 #root, #__next {
 	isolation: isolate;
 }
+
+@layer base {
+	:root[data-color-theme="light"] {
+		--color-primary: 226, 100%, 97%;
+		--color-secondary: 226, 57%, 21%;
+		--color-accent: 243, 75%, 59%;
+	}
+	:root[data-color-theme="dark"] {
+		--color-primary: 226, 57%, 21%;
+		--color-secondary: 226, 100%, 97%;
+		--color-accent: 243, 75%, 59%;
+	}
+}

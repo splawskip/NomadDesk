@@ -17,7 +17,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
 	// Get theme cookie.
-	const theme = cookies().get('theme')?.value ?? 'light';
+  const theme = cookies().get('theme')?.value ?? 'light';
 	// Build root layout.
   return (
     <html lang="en" data-color-theme={theme}>

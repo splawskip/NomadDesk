@@ -22,14 +22,13 @@ const ThemeToggle = ({initialTheme} : ThemeToggleProps) => {
 		});
 
 		const root = document.documentElement;
-
 		root.setAttribute('data-color-theme', nextTheme);
 	};
 
 	return (
-		<button type="button" className={`flex ${theme === 'light' ? 'justify-start' : 'justify-end'} items-center h-8 w-14 bg-gray-500 rounded-3xl`} onClick={handleToggleTheme}>
-			<span className="grid place-items-center h-6 w-6 bg-primary rounded-full m-1">
-				<ThemeIcon className="h-4 w-4 text-secondary"></ThemeIcon>
+		<button type="button" className={`flex ${theme === 'light' ? 'justify-start' : 'justify-end'} items-center h-8 w-14 bg-white-100 dark:bg-gray-950 rounded-3xl`} onClick={handleToggleTheme}>
+			<span className="grid place-items-center h-6 w-6 bg-white-50 dark:bg-gray-600 rounded-full m-1">
+				<ThemeIcon className="h-4 w-4 text-gray-950 dark:text-white-50"></ThemeIcon>
 			</span>
 		</button>
 	);

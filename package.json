@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.17.15",
     "@types/js-cookie": "^3.0.6",
     "next": "14.0.4",
     "react": "^18",

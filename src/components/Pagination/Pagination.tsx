@@ -1,9 +1,15 @@
+import { SearchParams } from "@/types";
 import { range } from "@/utils";
 import Link from "next/link";
 import { useId } from "react";
 import { ArrowLeft, ArrowRight } from "react-feather";
 
-const Pagination = ({ count = 0, searchParams = {} }) => {
+type PaginationProps = {
+	count?: number;
+	searchParams?: SearchParams;
+};
+
+const Pagination = ({ count = 0, searchParams = {} } : PaginationProps) => {
     const id = useId();
     const currentPage = Number(searchParams.page ?? 1);
     const maxPageIndicator = 10;

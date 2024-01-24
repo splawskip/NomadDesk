@@ -4,7 +4,7 @@ import { SEARCH_VALUES } from "@/constants";
 import useDebounce from "@/hooks/debounce";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Search as SearchIcon } from "react-feather";
 
 const Search = () => {
@@ -26,7 +26,7 @@ const Search = () => {
 		router.push(`?category=${queryValue}`);
 	}, [router, query]);
 
-	const handleChange = (event) => {
+	const handleChange = (event:React.ChangeEvent<HTMLInputElement>) => {
 		const value = event.target.value;
 		setValue(value);
 

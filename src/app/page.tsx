@@ -3,8 +3,13 @@ import JobBoard from "@/components/JobBoard";
 import Pagination from "@/components/Pagination";
 import Search from "@/components/Search";
 import { getJobs } from "@/lib/jobs/api";
+import { SearchParams } from "@/types";
 
-export default async function Home({searchParams}) {
+type HomeProps = {
+	searchParams: SearchParams,
+};
+
+export default async function Home({searchParams} : HomeProps) {
 	const {page_count, results} = await getJobs(searchParams);
   return (
 	<main className='w-full min-h-screen'>

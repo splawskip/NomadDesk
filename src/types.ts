@@ -31,3 +31,7 @@ type Company = {
 	short_name: string,
 	name: string,
 };
+
+export type SearchParams = {
+	[key: string]: string;
+};

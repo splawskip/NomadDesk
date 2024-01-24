@@ -1,7 +1,11 @@
 import JobCard from "../JobCard";
 import { Offer } from "@/types";
 
-const JobBoard = async ({jobs}) => {
+type JobBoardProps = {
+	jobs: Offer[],
+};
+
+const JobBoard = async ({jobs} : JobBoardProps) => {
 	// Build component.
 	return (
 		<section className="grid gap-4 grid-cols-3 p-6 bg-white-100 dark:bg-gray-900">

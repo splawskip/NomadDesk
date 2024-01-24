@@ -17,4 +17,4 @@ export const range = (start, end, step = 1) => {
 	  output.push(i);
 	}
 	return output;
-  };
+};

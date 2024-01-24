@@ -11,6 +11,7 @@ const VisuallyHidden = ({
   children,
   ...delegated
 } : VisuallyHiddenProps) => {
+  // Build component.
   return (
     <span
       className={`${styles.wrapper} ${className}`}

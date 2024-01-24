@@ -5,6 +5,7 @@ import { Briefcase, MapPin } from "react-feather";
 
 const JobCard = ({job} : {job: Offer}) => {
 	const {id, name, contents, company, categories, levels} = job;
+	// Build component.
 	return (
 		<Link href={`/offer/${id}`} className="flex grow justify-start items-stretch">
 			<article className="p-4 shadow-sm shadow-gray-400 dark:shadow-gray-800 bg-white-50 dark:bg-gray-800 rounded-lg flex flex-col justify-start items-start gap-4">

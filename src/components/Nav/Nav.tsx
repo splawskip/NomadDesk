@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 const Nav = () => {
+	// Build component.
 	return (
 		<nav className="flex justify-end items-center">
 			<ul className="flex justify-between items-center gap-4">

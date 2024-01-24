@@ -4,6 +4,7 @@ type ActionBarProps = {
 };
 
 const ActionBar = ({children, className} : ActionBarProps) => {
+	// Build component.
 	return (
 		<section className={className}>
 			{children}

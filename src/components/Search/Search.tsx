@@ -4,27 +4,29 @@ import { SEARCH_VALUES } from "@/constants";
 import useDebounce from "@/hooks/debounce";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Search as SearchIcon } from "react-feather";
 
 const Search = () => {
 	const router = useRouter();
-	const searchParams = useSearchParams();
+	const stringifiedSearchParams = useSearchParams().toString();
+	const searchParams = useMemo(() => (new URLSearchParams(stringifiedSearchParams)), [stringifiedSearchParams]);
 	const [value, setValue] = useState(searchParams.get('category') ?? '');
 	const [suggestions, setSuggestions] = useState<string[]>([]);
-	const query = useDebounce(value, 500);
+	const query = value;
 	// Run the effect so we got stateful url.
 	useEffect(() => {
 		// Get query value.
-		const queryValue = query;
+		const queryValue = value;
 		// Check if we got something.
 		if(!queryValue) {
-			router.push('/');
+			searchParams.delete('category', queryValue);
+			router.push(`/?${searchParams.toString()}`);
 			return;
 		}
 		// Go to the query location.
-		router.push(`?category=${queryValue}`);
-	}, [router, query]);
+		router.push(`/?${searchParams.toString()}`);
+	}, [router, value, searchParams]);
 
 	const handleChange = (event:React.ChangeEvent<HTMLInputElement>) => {
 		const value = event.target.value;
@@ -48,10 +50,11 @@ const Search = () => {
 			{suggestions.length > 0 && (
 				<ul className="absolute max-h-72 overflow-y-scroll top-full right-0 left-0 p-6 flex gap-3 flex-col justify-start items-start shadow shadow-white-50/20 bg-white-50 dark:bg-gray-800">
 					{suggestions.map((suggestion) => (
-						<Link key={suggestion} href={`/?category=${suggestion}`} className="w-full">
-							<li className="w-full">{suggestion}</li>
-						</Link>
-					))}
+							<Link key={suggestion} href={`/?category=${suggestion}`} className="w-full">
+								<li className="w-full">{suggestion}</li>
+							</Link>
+						)
+					)}
 				</ul>
 			)}
 		</div>

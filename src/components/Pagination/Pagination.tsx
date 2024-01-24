@@ -12,9 +12,9 @@ type PaginationProps = {
 const Pagination = ({ count = 0, searchParams = {} } : PaginationProps) => {
     const id = useId();
     const currentPage = Number(searchParams.page ?? 1);
-    const maxPageIndicator = 10;
+    const maxPageIndicator = 11;
 
-    if (count <= 0 || !('page' in searchParams)) {
+    if (count <= 0) {
         return;
     }
 
@@ -35,9 +35,9 @@ const Pagination = ({ count = 0, searchParams = {} } : PaginationProps) => {
     return (
         <nav className="w-full flex justify-center items-center bg-white-100 dark:bg-gray-900 pb-6">
             <ul className="inline-flex -space-x-px text-base h-10">
-                <li>
+				{currentPage !== 1 && (                <li>
                     <a href={`/?${previousUrl.toString()}`} className="flex items-center justify-center px-4 h-10 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"><ArrowLeft /></a>
-                </li>
+                </li>)}
                 {range(startPage, endPage).map((pageNumber) => {
                     const currentUrl = new URLSearchParams(searchParams);
                     currentUrl.set('page', pageNumber.toString());
@@ -50,9 +50,11 @@ const Pagination = ({ count = 0, searchParams = {} } : PaginationProps) => {
                         </li>
                     );
                 })}
+				{currentPage !== (count - 1) && (
                 <li>
-                    <a href={`/?${nextUrl.toString()}`} className="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"><ArrowRight /></a>
-                </li>
+				<a href={`/?${nextUrl.toString()}`} className="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"><ArrowRight /></a>
+			</li>
+				)}
             </ul>
         </nav>
     );

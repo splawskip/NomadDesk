@@ -12,7 +12,7 @@ type HomeProps = {
 export default async function Home({searchParams} : HomeProps) {
 	const {page_count, results} = await getJobs(searchParams);
   return (
-	<main className='w-full min-h-screen'>
+	<main className='w-full min-h-screen flex flex-col'>
 		<ActionBar className="flex justify-between items-center gap-3 p-6 bg-white-50 dark:bg-gray-800">
 			<Search/>
 		</ActionBar>

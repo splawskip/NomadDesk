@@ -23,12 +23,12 @@ export default function RootLayout({
 	// Build root layout.
   return (
 	<QueryProvider>
-		<html lang="en" data-color-theme={theme}>
-		<body className={`${inter.className} flex flex-col min-h-screen`}>
-		<Header theme={theme}/>
-			{children}
-		<Footer/>
-		</body>
+		<html lang="en" data-color-theme={theme} className="scroll-smooth">
+			<body className={`${inter.className} bg-white-100 dark:bg-gray-900 flex flex-col min-h-screen`}>
+				<Header theme={theme}/>
+					{children}
+				<Footer/>
+			</body>
 		</html>
 	</QueryProvider>
   )

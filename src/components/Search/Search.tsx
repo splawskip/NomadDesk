@@ -50,7 +50,7 @@ const Search = () => {
 			{suggestions.length > 0 && (
 				<ul className="absolute max-h-72 overflow-y-scroll top-full right-0 left-0 p-6 flex gap-3 flex-col justify-start items-start shadow shadow-white-50/20 bg-white-50 dark:bg-gray-800">
 					{suggestions.map((suggestion) => (
-							<Link key={suggestion} href={`/?category=${suggestion}`} className="w-full">
+							<Link prefetch={true} key={suggestion} href={`/?category=${suggestion}`} className="w-full">
 								<li className="w-full">{suggestion}</li>
 							</Link>
 						)

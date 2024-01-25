@@ -23,7 +23,7 @@ export default function RootLayout({
 	// Build root layout.
   return (
 	<QueryProvider>
-		<html lang="en" data-color-theme={theme} className="scroll-smooth">
+		<html lang="en" data-color-theme={theme} className="scroll-smooth overflow-x-hidden">
 			<body className={`${inter.className} bg-white-100 dark:bg-gray-900 flex flex-col min-h-screen`}>
 				<Header theme={theme}/>
 					{children}

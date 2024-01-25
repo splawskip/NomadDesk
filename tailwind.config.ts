@@ -23,7 +23,10 @@ const config: Config = {
 				'900': 'hsl(0, 0%, 24%)',
 				'950': 'hsl(0, 0%, 16%)',
 			},
-		}
+		},
+		spacing: {
+			'suggestions': 'calc(100% + .75rem)',
+		},
     },
   },
   plugins: [],

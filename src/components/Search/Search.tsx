@@ -31,7 +31,7 @@ const Search = () => {
 	}, [router, value, searchParams]);
 
 	const handleBlur = (event: React.FocusEvent<HTMLDivElement>) => {
-		if(!searchRef?.current?.contains(event.relatedTarget)) {
+		if (searchRef.current && !searchRef?.current?.contains(event.relatedTarget)) {
 			setSuggestions([]);
 		}
 	};

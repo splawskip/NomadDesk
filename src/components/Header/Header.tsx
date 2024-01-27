@@ -12,7 +12,7 @@ const Header = ({theme} : HeaderProps) => {
 		<header className="w-full flex justify-between items-center gap-4 border-b border-gray-100 bg-white-50 text-gray-950 dark:border-gray-600 dark:bg-gray-800 dark:text-white-50 p-6">
 			<div className="flex justify-start items-center gap-4">
 				<Link prefetch={true} href='/'><h1 className="text-secondary text-xl font-bold">NomadDesk</h1></Link>
-				<p className="text-secondary text-sm">#1 Job Board for digital nomads</p>
+				<p className="hidden md:block text-secondary text-sm">#1 Job Board for digital nomads</p>
 				<ThemeToggle initialTheme={theme}></ThemeToggle>
 			</div>
 			<Nav></Nav>

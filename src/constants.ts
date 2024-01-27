@@ -1,5 +1,16 @@
 import { Facebook, GitHub, Instagram, Linkedin } from "react-feather";
 
+export const NAV = [
+	{
+		slug: 'Jobs offers',
+		url: '/',
+	},
+	{
+		slug: 'Blog',
+		url: '/blog',
+	}
+];
+
 export const SOCIALS = [
 	{
 		name: 'Facebook',
@@ -22,7 +33,6 @@ export const SOCIALS = [
 		url: 'https://github.com/splawskip',
 	},
 ];
-
 
 export const SEARCH_VALUES = [
 	'Accounting',

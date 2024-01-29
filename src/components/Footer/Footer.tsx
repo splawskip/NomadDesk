@@ -1,11 +1,11 @@
 import Link from "next/link";
 import VisuallyHidden from "../VisuallyHidden/VisuallyHidden";
 import { SOCIALS } from "@/constants";
-import React from "react";
+import { useId } from "react";
 import Image from "next/image";
 
 const Footer = () => {
-	const id = React.useId();
+	const id = useId();
 	// Build component.
 	return (
 		<footer className="mt-auto w-full flex flex-col justify-center items-center md:flex-row md:justify-between gap-4 border-b border-gray-100 bg-white-50 text-gray-950 dark:border-gray-600 dark:bg-gray-800 dark:text-white-50 p-6">

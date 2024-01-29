@@ -14,7 +14,7 @@ const Pagination = ({ count = 0, searchParams = {} } : PaginationProps) => {
     const currentPage = Number(searchParams.page ?? 1);
     const maxPageIndicator = 11;
 
-    if (count <= 0) {
+    if (count <= 1) {
         return;
     }
 

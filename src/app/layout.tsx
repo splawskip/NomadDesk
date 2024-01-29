@@ -21,8 +21,8 @@ export default function RootLayout({
   const theme = cookies().get('theme')?.value ?? 'light';
 	// Build root layout.
   return (
-	<html lang="en" data-color-theme={theme} className="scroll-smooth overflow-x-hidden">
-		<body className={`${inter.className} bg-white-100 dark:bg-gray-900 flex flex-col min-h-screen`}>
+	<html lang="en" data-color-theme={theme} className="scroll-smooth overflow-x-hidden min-h-screen">
+		<body className={`${inter.className} min-h-screen bg-white-100 dark:bg-gray-900 flex flex-col`}>
 			<Header theme={theme}/>
 				{children}
 			<Footer/>

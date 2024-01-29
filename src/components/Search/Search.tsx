@@ -15,7 +15,7 @@ const Search = () => {
 	const query = value;
 	const [suggestions, setSuggestions] = useState<string[]>([]);
 	const hasSuggestions = suggestions.length > 0;
-	const searchRef = useRef<HTMLDivElement | null>(null);
+	const searchRef = useRef<HTMLLabelElement | null>(null);
 	// Run the effect so we got stateful url.
 	useEffect(() => {
 		// Get query value.
@@ -30,7 +30,7 @@ const Search = () => {
 		router.push(`/?${searchParams.toString()}`);
 	}, [router, value, searchParams]);
 
-	const handleBlur = (event: React.FocusEvent<HTMLDivElement>) => {
+	const handleBlur = (event: React.FocusEvent<HTMLLabelElement>) => {
 		if (searchRef.current && !searchRef?.current?.contains(event.relatedTarget)) {
 			setSuggestions([]);
 		}
@@ -53,7 +53,7 @@ const Search = () => {
 
 	// Build component.
 	return (
-		<div ref={searchRef} className={`relative flex justify-start items-center gap-2 border-2 border-transparent bg-white-100 dark:bg-gray-950 rounded-3xl p-2 focus-within:border-gray-950 dark:focus-within:border-white-50 text-gray-950 dark:text-white-50`} onBlur={handleBlur}>
+		<label ref={searchRef} className={`relative flex justify-start items-center gap-2 border-2 border-transparent bg-white-100 dark:bg-gray-950 rounded-3xl p-2 focus-within:border-gray-950 dark:focus-within:border-white-50 text-gray-950 dark:text-white-50`} onBlur={handleBlur}>
 			<SearchIcon className="text-gray-950 dark:text-white-50"></SearchIcon>
 			<input type="search" placeholder="Search" className="bg-transparent grow outline-none" value={query} onChange={handleChange}/>
 			{hasSuggestions && (
@@ -66,7 +66,7 @@ const Search = () => {
 					)}
 				</ul>
 			)}
-		</div>
+		</label>
 	);
 };
 

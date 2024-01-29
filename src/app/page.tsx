@@ -2,6 +2,7 @@ import ActionBar from "@/components/ActionBar";
 import JobBoard from "@/components/JobBoard";
 import Pagination from "@/components/Pagination";
 import Search from "@/components/Search";
+import Select from "@/components/Select";
 import { getJobs } from "@/lib/jobs/api";
 import { SearchParams } from "@/types";
 
@@ -14,7 +15,8 @@ export default async function Home({searchParams} : HomeProps) {
   return (
 	<main className='w-full min-h-screen flex flex-col'>
 		<ActionBar className="flex justify-between items-center gap-3 p-6 bg-white-50 dark:bg-gray-800">
-			<Search/>
+			<Search />
+			<Select />
 		</ActionBar>
 		<JobBoard jobs={results}></JobBoard>
 		<Pagination searchParams={searchParams} count={page_count}></Pagination>

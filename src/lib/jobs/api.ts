@@ -6,8 +6,10 @@ export const getJobs = async (queryArgs = {}) => {
 		const searchParams = new URLSearchParams(queryArgs);
 		// Append API key to search params.
 		searchParams.set('api_key', process.env.THE_MUSE_API_KEY ?? '');
+		// Who works from office anyway?
+		searchParams.set('location', 'Flexible%20%2F%20Remote');
 		// Set page parameter if it is missing.
-		if (!searchParams.has('page')){
+		if (!searchParams.has('page')) {
 			searchParams.set('page', '1');
 		}
 		// Call the endpoint.

@@ -36,3 +36,34 @@ p, h1, h2, h3, h4, h5, h6 {
 	isolation: isolate;
 }
 
+:root {
+	--clr-nomadic-sand-50: 47, 90%, 96%;
+	--clr-nomadic-sand-100: 49, 82%, 89%;
+	--clr-nomadic-sand-200: 47, 83%, 77%;
+	--clr-nomadic-sand-300: 45, 84%, 68%;
+	--clr-nomadic-sand-400: 43, 84%, 56%;
+	--clr-nomadic-sand-500: 37, 80%, 50%;
+	--clr-nomadic-sand-600: 31, 82%, 44%;
+	--clr-nomadic-sand-700: 25, 79%, 37%;
+	--clr-nomadic-sand-800: 22, 71%, 31%;
+	--clr-nomadic-sand-900: 21, 67%, 26%;
+	--clr-nomadic-sand-950: 20, 81%, 14%;
+}
+
+.link {
+	transition: .3s cubic-bezier(.25, .8, .5, 1);
+	display: inline;
+	padding-bottom: 3px;
+	color: inherit;
+	text-decoration: none;
+	overflow-wrap: anywhere;
+	background-image: linear-gradient(to right, hsl(var(--clr-nomadic-sand-100)) 0, hsl(var(--clr-nomadic-sand-300)) 100%);
+	background-repeat: no-repeat;
+	background-position: left 100%;
+	background-size: 0 3px;
+}
+
+.link:hover,
+.link-active {
+	background-size: 100% 3px;
+}

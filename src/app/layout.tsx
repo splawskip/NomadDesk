@@ -3,7 +3,6 @@ import { cookies } from 'next/headers';
 import { Inter } from 'next/font/google'
 import './globals.css'
 import Header from '@/components/Header';
-import QueryProvider from '@/lib/react-query/QueryProvider';
 import Footer from '@/components/Footer';
 
 const inter = Inter({ subsets: ['latin'] })
@@ -22,14 +21,12 @@ export default function RootLayout({
   const theme = cookies().get('theme')?.value ?? 'light';
 	// Build root layout.
   return (
-	<QueryProvider>
-		<html lang="en" data-color-theme={theme} className="scroll-smooth overflow-x-hidden">
-			<body className={`${inter.className} bg-white-100 dark:bg-gray-900 flex flex-col min-h-screen`}>
-				<Header theme={theme}/>
-					{children}
-				<Footer/>
-			</body>
-		</html>
-	</QueryProvider>
+	<html lang="en" data-color-theme={theme} className="scroll-smooth overflow-x-hidden">
+		<body className={`${inter.className} bg-white-100 dark:bg-gray-900 flex flex-col min-h-screen`}>
+			<Header theme={theme}/>
+				{children}
+			<Footer/>
+		</body>
+	</html>
   )
 }

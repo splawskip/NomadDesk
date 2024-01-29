@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { Search as SearchIcon } from "react-feather";
+import VisuallyHidden from "../VisuallyHidden/VisuallyHidden";
 
 const Search = () => {
 	const router = useRouter();
@@ -53,7 +54,10 @@ const Search = () => {
 
 	// Build component.
 	return (
-		<label ref={searchRef} className={`relative flex justify-start items-center gap-2 border-2 border-transparent bg-white-100 dark:bg-gray-950 rounded-3xl p-2 focus-within:border-gray-950 dark:focus-within:border-white-50 text-gray-950 dark:text-white-50`} onBlur={handleBlur}>
+		<label ref={searchRef} className={`z-10 relative flex justify-start items-center gap-2 border-2 border-transparent bg-white-100 dark:bg-gray-950 rounded-3xl p-2 focus-within:border-gray-950 dark:focus-within:border-white-50 text-gray-950 dark:text-white-50`} onBlur={handleBlur}>
+			<VisuallyHidden>
+				Type to search job category.
+			</VisuallyHidden>
 			<SearchIcon className="text-gray-950 dark:text-white-50"></SearchIcon>
 			<input type="search" placeholder="Search" className="bg-transparent grow outline-none" value={query} onChange={handleChange}/>
 			{hasSuggestions && (

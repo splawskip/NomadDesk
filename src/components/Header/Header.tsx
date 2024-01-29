@@ -14,7 +14,7 @@ const Header = ({theme} : HeaderProps) => {
 			<div className="flex justify-start items-center gap-4">
 				<Link prefetch={true} href='/' className="flex justify-start items-center flex-nowrap gap-3">
 					<Image src="/logo.webp" width={45} height={45} priority={true} alt="Logo of the site"></Image>
-					<h1 className="text-secondary text-xl font-bold">NomadDesk</h1>
+					<h1 className="text-secondary text-xl font-bold link">NomadDesk</h1>
 				</Link>
 				<p className="hidden md:block text-secondary text-sm">#1 Job Board for digital nomads</p>
 				<ThemeToggle initialTheme={theme}></ThemeToggle>

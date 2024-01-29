@@ -9,7 +9,7 @@ const JobCard = ({job} : {job: Offer}) => {
 	return (
 		<Link prefetch={true} href={`/offer/${id}`} className="flex grow justify-start items-stretch">
 			<article className="p-4 shadow-sm shadow-gray-400 dark:shadow-gray-800 bg-white-50 dark:bg-gray-800 rounded-lg flex flex-col justify-start items-start gap-4">
-				<h3 className="text-xl font-semibold text-gray-950 dark:text-white-50">{name}</h3>
+				<h2 className="text-xl font-semibold text-gray-950 dark:text-white-50">{name}</h2>
 				<p className="text-base text-gray-800 dark:text-white-200">{excerptify(contents)}</p>
 				<ol className="mt-auto flex justify-start items-center flex-wrap gap-4 text-gray-950 dark:text-white-50">
 					<li className="flex justify-start items-center gap-2 text-sm">

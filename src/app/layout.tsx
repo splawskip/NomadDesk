@@ -4,6 +4,7 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import clsx from 'clsx';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -22,7 +23,7 @@ export default function RootLayout({
 	// Build root layout.
   return (
 	<html lang="en" data-color-theme={theme} className="scroll-smooth overflow-x-hidden min-h-screen">
-		<body className={`${inter.className} min-h-screen bg-white-100 dark:bg-gray-900 flex flex-col`}>
+		<body className={clsx(inter.className, 'min-h-screen bg-white-100 dark:bg-gray-900 flex flex-col')}>
 			<Header theme={theme}/>
 				{children}
 			<Footer/>

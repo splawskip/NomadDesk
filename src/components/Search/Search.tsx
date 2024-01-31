@@ -53,7 +53,7 @@ const Search = () => {
 
 	// Build component.
 	return (
-		<label ref={searchRef} className={`z-20 relative flex justify-start items-center gap-2 border-2 border-transparent bg-white-100 dark:bg-gray-950 rounded-3xl p-2 outline-none focus-within:ring ring-blue-500 text-gray-950 dark:text-white-50`}>
+		<label ref={searchRef} className='z-20 relative flex justify-start items-center gap-2 border-2 border-transparent bg-white-100 dark:bg-gray-950 rounded-3xl p-2 outline-none focus-within:ring ring-blue-500 text-gray-950 dark:text-white-50'>
 			<VisuallyHidden>
 				Type to search job category.
 			</VisuallyHidden>

@@ -1,5 +1,6 @@
 import { SearchParams } from "@/types";
 import { range } from "@/utils";
+import clsx from "clsx";
 import Link from "next/link";
 import { useId } from "react";
 import { ArrowLeft, ArrowRight } from "react-feather";
@@ -46,7 +47,7 @@ const Pagination = ({ count = 0, searchParams = {} } : PaginationProps) => {
                     const isCurrent = pageNumber === currentPage;
                     return (
                         <li key={`${id}-${pageNumber}`}>
-                            <Link href={`/?${currentUrl.toString()}`} prefetch={true} className={`flex items-center justify-center px-4 h-10 leading-tight border border-gray-300 ${isCurrent ? 'bg-white-200 text-gray-950 dark:bg-gray-950 dark:text-white-100 font-semibold' : 'bg-white text-gray-500 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800'} dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white outline-none focus-visible:relative focus-visible:z-10 focus-visible:ring ring-blue-500`}>
+                            <Link href={`/?${currentUrl.toString()}`} prefetch={true} className={clsx('flex items-center justify-center px-4 h-10 leading-tight border border-gray-300', isCurrent ? 'bg-white-200 text-gray-950 dark:bg-gray-950 dark:text-white-100 font-semibold' : 'bg-white text-gray-500 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800' ,'dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white outline-none focus-visible:relative focus-visible:z-10 focus-visible:ring ring-blue-500')}>
                                 {pageNumber}
                             </Link>
                         </li>

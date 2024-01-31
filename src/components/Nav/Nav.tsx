@@ -1,6 +1,7 @@
 'use client';
 
 import { NAV } from "@/constants";
+import clsx from "clsx";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useId, useState } from "react";
@@ -20,7 +21,7 @@ const Nav = () => {
 				<ul className="flex justify-between items-center gap-4">
 					{NAV.map(({slug, url}) => (
 						<li key={`${id}-${slug}`} className="text-secondary">
-							<Link prefetch={true} href={url} className={`link ${pathname === url ? 'link-active' : undefined} outline-none focus-visible:ring ring-blue-500`}>{slug}</Link>
+							<Link prefetch={true} href={url} className={clsx('link', { 'link-active': pathname === url }, 'outline-none focus-visible:ring ring-blue-500')}>{slug}</Link>
 						</li>
 					))}
 				</ul>
@@ -33,7 +34,7 @@ const Nav = () => {
 					<ul className="flex flex-col justify-start items-end gap-4 mt-10">
 						{NAV.map(({slug, url}) => (
 							<li key={`m-${id}-${slug}`} className="text-secondary">
-								<Link prefetch={true} href={url} className={`link ${pathname === url ? 'link-active' : undefined} outline-none focus-visible:ring ring-blue-500`}>{slug}</Link>
+								<Link prefetch={true} href={url} className={clsx('link', { 'link-active': pathname === url }, 'outline-none focus-visible:ring ring-blue-500')}>{slug}</Link>
 							</li>
 						))}
 					</ul>

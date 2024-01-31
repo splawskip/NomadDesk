@@ -2,7 +2,7 @@
 
 ![NomadDesk Preview Image](./public/preview-image.webp)
 
-# NomadDesk - Remote first Job Board for Digital Nomads
+![NomadDesk Logo](./public/logo.webp)# NomadDesk - Remote first Job Board for Digital Nomads
 
 Welcome to NomadDesk, job board dedicated to digital nomads seeking remote-only opportunities. Leveraging the latest in web technology, NomadDesk connects professionals with their ideal remote roles globally.
 

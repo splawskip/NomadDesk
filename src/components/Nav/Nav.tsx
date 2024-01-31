@@ -20,7 +20,7 @@ const Nav = () => {
 				<ul className="flex justify-between items-center gap-4">
 					{NAV.map(({slug, url}) => (
 						<li key={`${id}-${slug}`} className="text-secondary">
-							<Link prefetch={true} href={url} className={`link ${pathname === url ? 'link-active' : undefined}`}>{slug}</Link>
+							<Link prefetch={true} href={url} className={`link ${pathname === url ? 'link-active' : undefined} outline-none focus:ring ring-blue-500`}>{slug}</Link>
 						</li>
 					))}
 				</ul>
@@ -33,7 +33,7 @@ const Nav = () => {
 					<ul className="flex flex-col justify-start items-end gap-4 mt-10">
 						{NAV.map(({slug, url}) => (
 							<li key={`m-${id}-${slug}`} className="text-secondary">
-								<Link prefetch={true} href={url} className={`link ${pathname === url ? 'link-active' : undefined}`}>{slug}</Link>
+								<Link prefetch={true} href={url} className={`link ${pathname === url ? 'link-active' : undefined} outline-none focus:ring ring-blue-500`}>{slug}</Link>
 							</li>
 						))}
 					</ul>

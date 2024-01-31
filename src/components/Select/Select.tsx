@@ -19,7 +19,7 @@ const Select = () => {
 	};
 	// Build component.
 	return (
-		<label className={`relative min-w-28 text-center flex justify-start items-center gap-2 border-2 border-transparent bg-white-100 dark:bg-gray-950 rounded-3xl p-2 focus-within:border-gray-950 dark:focus-within:border-white-50 text-gray-950 dark:text-white-50`}>
+		<label className={`relative min-w-28 text-center flex justify-start items-center gap-2 border-2 border-transparent outline-none focus-within:ring ring-blue-500 rounded-3xl p-2 text-gray-950 dark:text-white-50`}>
 			<VisuallyHidden>Sort by: </VisuallyHidden>
 			<Sliders className="pointer-events-none text-gray-950 dark:text-white-50"/>
 			<select name="descending" className="appearance-none absolute inset-0 w-full pl-11 bg-transparent grow outline-none" value={value} onChange={handleChange}>

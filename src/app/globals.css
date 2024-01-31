@@ -95,17 +95,17 @@ p, h1, h2, h3, h4, h5, h6 {
 	}
 
 	.card:hover .card__body,
-	.card:focus .card__body {
+	.card:focus-visible .card__body {
 	  transform: translate(6px, -6px);
 	}
 
 	.card:hover:before,
-	.card:focus:before {
+	.card:focus-visible:before {
 	  transform: rotate(-45deg) scale(1);
 	}
 
 	.card:hover:after
-	.card:focus:after {
+	.card:focus-visible:after {
 	  transform: rotate(45deg) scale(1);
 	}
 }

@@ -26,7 +26,7 @@ const Nav = () => {
 				</ul>
 			</nav>
 			{isSideMenuOpen && (
-				<div className="z-20 w-full sm:w-1/2 fixed inset-y-0 right-0 flex flex-col items-end justify-start gap-4 bg-white-100 dark:bg-gray-900 p-6 md:hidden">
+				<div className="z-30 w-full sm:w-1/2 fixed inset-y-0 right-0 flex flex-col items-end justify-start gap-4 bg-white-100 dark:bg-gray-900 p-6 md:hidden">
 					<button type="button" name="Button that closes mobile side menu" className="block outline-none focus-visible:ring ring-blue-500 md:hidden" onClick={() => setIsSideMenuOpen(!isSideMenuOpen)}>
 						<X />
 					</button>

@@ -54,16 +54,16 @@ const Search = () => {
 
 	// Build component.
 	return (
-		<label ref={searchRef} className={`z-10 relative flex justify-start items-center gap-2 border-2 border-transparent bg-white-100 dark:bg-gray-950 rounded-3xl p-2 outline-none focus-within:ring ring-blue-500 text-gray-950 dark:text-white-50`} onBlur={handleBlur}>
+		<label ref={searchRef} className={`z-20 relative flex justify-start items-center gap-2 border-2 border-transparent bg-white-100 dark:bg-gray-950 rounded-3xl p-2 outline-none focus-within:ring ring-blue-500 text-gray-950 dark:text-white-50`} onBlur={handleBlur}>
 			<VisuallyHidden>
 				Type to search job category.
 			</VisuallyHidden>
 			<SearchIcon className="text-gray-950 dark:text-white-50"></SearchIcon>
 			<input type="search" placeholder="Search" className="bg-transparent grow outline-none" value={query} onChange={handleChange}/>
 			{hasSuggestions && (
-				<ul className="absolute transition-colors max-h-72 overflow-y-scroll border-2 border-white-200 top-suggestions right-0 left-0 p-6 flex gap-3 flex-col justify-start items-start rounded-3xl shadow-white-950/50 bg-white-50 dark:bg-gray-800 dark:border-gray-700 focus-visible:outline-none">
+				<ul className="transition-colors absolute max-h-72 overflow-y-scroll border-2 border-white-200 top-suggestions right-0 left-0 p-6 flex gap-3 flex-col justify-start items-start rounded-3xl shadow-white-950/50 bg-white-50 dark:bg-gray-800 dark:border-gray-700">
 					{suggestions.map((suggestion) => (
-							<Link prefetch={true} key={suggestion} href={`/?category=${suggestion}`} className="w-full px-4 py-1 rounded-3xl focus-visible:outline-none focus-visible:bg-white-100 hover:bg-white-100 dark:focus-visible:bg-gray-950 dark:hover:bg-gray-950">
+							<Link prefetch={true} key={suggestion} href={`/?category=${suggestion}`} className="link w-full px-4 py-1 rounded-3xl outline-none focus-within:ring ring-blue-500 focus-visible:bg-white-100 hover:bg-white-100 dark:focus-visible:bg-gray-950 dark:hover:bg-gray-950">
 								<li className="w-full">{suggestion}</li>
 							</Link>
 						)

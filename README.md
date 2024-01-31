@@ -1,38 +1,43 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+[![Stack Used](https://skillicons.dev/icons?i=vercel,github,git,nextjs,react,ts,js,tailwind,html,css,md)](https://skillicons.dev)
+
+![NomadDesk Preview Image](./public/preview-image.webp)
+
+# NomadDesk - Remote first Job Board for Digital Nomads
+
+Welcome to NomadDesk, job board dedicated to digital nomads seeking remote-only opportunities. Leveraging the latest in web technology, NomadDesk connects professionals with their ideal remote roles globally.
+
+## Features
+- **Real-Time Job Listings**: Fetching jobs from the Muse API, providing fresh and relevant opportunities.
+- **Server-Side State Management**: Ensures a seamless and shareable app experience with URL-reflected app states.
+- **Advanced NEXT.JS & React Features**: Utilizing NEXT.JS App Router and React Server Components for an optimized user experience.
+- **Intensive Use of Server Components**: Enhancing efficiency and user experience with server-side processing.
+- **Server-Side Network Calls**: All network operations are efficiently handled by the server, thanks to Server Components.
+- **Markdown & MDX Remote for Blog Posts**: Creative blog posts are composed using Markdown and MDX Remote for dynamic content.
+- **Theme Resolved On The Server**: The app's theme (light or dark) is resolved on the server, eliminating theme flicker on app load.
+
+## Tech Stack
+- **Frontend**: NEXT.JS, React, TypeScript, TailwindCSS, CSS, Postcss, JS-Cookie, Framer Motion for animations
+- **Backend**: Node.JS
+- **Content Creation**: ChatGPT-4 for blog writing, DALL-E for image generation
+- **Others**: ESLINT, React-Feather Icons, Markdown, MDX Remote
 
 ## Getting Started
+To start exploring remote job opportunities with NomadDesk:
+1. Clone the repository.
+2. Install the required dependencies.
+3. Start the development server and navigate to the local URL.
 
-First, run the development server:
+## Contribution
+Your contributions are welcome!
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Contributors
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- Przemysław Spławski 👉 [@splawskip](https://github.com/splawskip)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Contact
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+For any inquiries or support, please contact me by choosing some possible contact option available on my profile.
 
-## Learn More
+## License
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
-# NomadDesk
-# NomadDesk
+This project is licensed under the MIT License. See the [LICENSE](https://github.com/splawskip/NomadDesk/blob/main/LICENSE) file for more information.

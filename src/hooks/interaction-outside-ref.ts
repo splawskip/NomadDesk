@@ -7,6 +7,7 @@ const useInteractionOutsideRef = (
   useEffect(() => {
 	const handleOutsideInteraction = (event: MouseEvent | FocusEvent) => {
 		if (ref.current && !ref.current.contains(event.target as Node)) {
+			console.log(ref.current, event.target);
 		  ref.current.blur();
 		  callback();
 		}

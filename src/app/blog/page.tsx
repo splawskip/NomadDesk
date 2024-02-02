@@ -11,9 +11,9 @@ const Blog = async () => {
 	return (
 		<main className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 p-6 bg-white-100 dark:bg-gray-900">
 			      {posts.map(({
-		slug, title, excerpt, publishedOn, author, avatar
+		slug, title, excerpt, publishedOn, authorName, authorAvatar
 	  }) => (
-			<PostCard key={slug} avatar={avatar} author={author} slug={slug} title={title} excerpt={excerpt} publishedOn={publishedOn}></PostCard>
+			<PostCard key={slug} slug={slug} title={title} excerpt={excerpt} authorAvatar={authorAvatar} authorName={authorName} publishedOn={publishedOn}></PostCard>
 	  	)
 	  )}
 		</main>

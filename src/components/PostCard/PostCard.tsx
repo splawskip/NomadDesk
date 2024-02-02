@@ -7,11 +7,11 @@ type PostCardProps = {
 	title: string,
 	excerpt: string,
 	publishedOn: string,
-	avatar: string,
-	author: string,
+	authorAvatar: string,
+	authorName: string,
 };
 
-const PostCard = ({slug, title, excerpt, publishedOn, avatar, author} : PostCardProps) => {
+const PostCard = ({slug, title, excerpt, publishedOn, authorAvatar, authorName} : PostCardProps) => {
 	const href = `/post/${slug}`;
 	return (
 		<article className="p-4 shadow-sm shadow-gray-400 dark:shadow-gray-800 bg-white-50 dark:bg-gray-800 rounded-lg flex flex-col justify-start items-start gap-4 relative outline-none focus-visible:ring ring-blue-500">
@@ -29,8 +29,8 @@ const PostCard = ({slug, title, excerpt, publishedOn, avatar, author} : PostCard
 			  <span><ArrowRight></ArrowRight></span>
 			</Link>
 			<div className='w-full flex gap-2 justify-start items-center text-sm text-gray-500 dark:text-white-300'>
-			<Image src={`/${avatar}.webp`} height={40} width={40} alt='avatar' className='rounded-full'></Image>
-			<p>{author}</p>
+			<Image src={`/${authorAvatar}-avatar.webp`} height={40} width={40} alt='avatar' className='rounded-full'></Image>
+			<p>{authorName}</p>
 		  	<time dateTime={publishedOn} className="ml-auto">{publishedOn}</time>
 			</div>
 		</article>

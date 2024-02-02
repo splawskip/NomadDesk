@@ -12,7 +12,7 @@ export async function generateMetadata({ params } : BlogPostProps) {
 	const {frontmatter} = await loadBlogPost(params.slug);
 
 	return {
-	  title: `${frontmatter.title} - Post`,
+	  title: `${frontmatter.title} - Post <- NomadDesk`,
 	  description: frontmatter.excerpt,
 	};
 }

@@ -1,0 +1,202 @@
+---
+title: A Recursive Approach to Argument Parsing in PHP
+excerpt: One of the most commonly-misunderstood operators is Modulo (%). In this tutorial, we'll unpack exactly what this little bugger does, and learn how it can help us solve practical problems.
+publishedOn: '02-02-2024'
+author: Przemysław Spławski
+avatar: logo
+---
+
+## Context and Purpose of `parse_args` function
+
+This function was specifically crafted for our PHP In-House framework, which draws inspiration from React's component and prop system. Much like React components receive props, our framework's components accept various arguments that dictate their behavior and appearance. The `parse_args` function was designed to handle the parsing of these props in a way that's both efficient and flexible, allowing for deep merging of default and provided props, and the ability to selectively remove certain arguments post-merge. This advanced functionality enhances our framework's capability to manage component arguments in a nuanced and sophisticated manner, akin to React's own props system but tailored to the PHP environment.
+
+## A Recursive Approach to Argument Parsing in PHP
+
+When working with WordPress, or PHP in general, handling arrays of arguments efficiently can significantly impact the clarity and flexibility of your code. WordPress offers a handy function called `wp_parse_args()` for merging user-defined arguments into defaults. However, this function doesn't support recursive parsing and merging of arrays. This is where our custom `parse_args` function comes into play, enhancing the capabilities of argument parsing to a new level.
+
+### What `parse_args` Does Differently
+
+Before diving into the code, let's highlight what makes `parse_args` stand out:
+
+- **Recursive Merging:** Unlike `wp_parse_args`, `parse_args` can recursively merge arrays. This means if an array argument contains another array, it preserves the structure and merges it with the default values at every depth.
+- **Handling Unsets:** It allows for specific arguments to be removed from the final array after merging, providing more control over the output.
+
+### Understanding the Function Step by Step
+
+Let's break down the function into smaller chunks to understand how it operates:
+
+#### Initial Checks and Setup
+
+```php
+if ( ! is_array( $unsets ) ) {
+    $unsets = [];
+}
+
+if ( ! is_array( $arguments ) ) {
+    if ( ! is_array( $defaults ) || empty( $defaults ) ) {
+        return [];
+    } else {
+        return $defaults;
+    }
+} elseif ( ! is_array( $defaults ) ) {
+    return $arguments;
+}
+```
+
+This section ensures that both `$unsets` and `$arguments` are arrays. If not, it sets up `$unsets` as an empty array and returns early in cases where either `$arguments` or `$defaults` isn't an array, ensuring type safety and avoiding further unnecessary processing.
+
+#### Pre-filling and Numeric Array Handling
+
+```php
+$parsed = $defaults;
+$both_arrays_numeric = wp_is_numeric_array( $arguments ) && wp_is_numeric_array( $defaults );
+$prepends = [];
+```
+
+Here, the function prepares the groundwork for merging by setting `$parsed` as `$defaults` and checking if both `$arguments` and `$defaults` are numeric arrays, which affects how values are merged.
+
+#### Main Merging Logic
+
+```php
+foreach ( $arguments as $key => $value ) {
+    if ( ! isset( $parsed[ $key ] ) ) {
+        $parsed[ $key ] = $value;
+        continue;
+    }
+
+    if ( ! $both_arrays_numeric && is_array( $value ) && is_array( $parsed[ $key ] ) ) {
+        $unset = $unsets[ $key ] ?? [];
+        $parsed[ $key ] = parse_args( $value, $parsed[ $key ], $unset );
+    } elseif ( $both_arrays_numeric ) {
+        $prepends[] = $value;
+    } else {
+        $parsed[ $key ] = $value;
+    }
+}
+```
+
+This chunk is the heart of the function, iterating over each argument. It decides whether to merge arrays recursively, prepend values if both arrays are numeric, or simply replace the default with the argument value.
+
+#### Handling Prepends and Unsets
+
+```php
+if ( ! empty( $prepends ) ) {
+    array_unshift( $parsed, ...$prepends );
+}
+
+foreach ( $unsets as $unset ) {
+    if ( isset( $parsed[ $unset ] ) ) {
+        unset( $parsed[ $unset ] );
+    }
+}
+```
+
+After merging, any values meant to be prepended (in cases of numeric arrays) are added to the beginning. Then, it processes `$unsets` to remove specified keys from the final array.
+
+#### Final Adjustments for Numeric Arrays
+
+```php
+if ( $both_arrays_numeric && ! empty( $unsets ) ) {
+    $parsed = array_values( $parsed );
+}
+```
+
+For numeric arrays, this ensures that the final array is re-indexed, preserving the sequential index order, especially after unset operations.
+
+### Comparison with `wp_parse_args`
+
+The built-in `wp_parse_args `function is great for basic argument merging but falls short when dealing with complex or multi-dimensional arrays. Our parse_args function excels by:
+
+* **Recursively Merging Arrays:** It can navigate through nested arrays and merge them accordingly, which `wp_parse_args` cannot do.
+* **Selective Unsetting:** It provides the ability to specify keys that should be removed from the final output, offering finer control over the resultant array.
+
+### The Complete Function
+
+Here's the complete code for `parse_args` for your reference:
+
+```php
+/**
+ * Parses arguments against default values RECURSIVELY (means: preserves arrays).
+ *
+ * @param mixed $arguments some arguments.
+ * @param mixed $defaults default arguments list.
+ * @param mixed $unsets arguments that should be unset from after the merge.
+ *
+ * @return array of arguments with defaults filled in.
+ */
+function parse_args( $arguments, $defaults, $unsets = [] ): array {
+	if ( ! is_array( $unsets ) ) {
+		// Smart.
+		$unsets = [];
+	}
+
+	if ( ! is_array( $arguments ) ) {
+		if ( ! is_array( $defaults ) || empty( $defaults ) ) {
+			return [];
+		} else {
+			return $defaults;
+		}
+	} elseif ( ! is_array( $defaults ) ) {
+		if ( empty( $arguments ) && empty( $defaults ) ) {
+			return $arguments;
+		} elseif ( empty( $arguments ) && is_array( $defaults ) ) {
+			return $defaults;
+		} else {
+			return [];
+		}
+		return $arguments;
+	}
+
+	// Pre-fill the parsed values with defaults, so we can easily overwrite every property.
+	$parsed = $defaults;
+	$both_arrays_numeric = wp_is_numeric_array( $arguments ) && wp_is_numeric_array( $defaults );
+	$prepends = [];
+
+	foreach ( $arguments as $key => $value ) {
+		if ( ! isset( $parsed[ $key ] ) ) {
+			$parsed[ $key ] = $value;
+			continue;
+		}
+
+		if ( ! $both_arrays_numeric && is_array( $value ) && is_array( $parsed[ $key ] ) ) {
+			// The passed argument in this place is an array and so is the default one, so we need to go one level deeper.
+			$unset = $unsets[ $key ] ?? [];
+			$parsed[ $key ] = parse_args( $value, $parsed[ $key ], $unset );
+		} elseif ( $both_arrays_numeric ) {
+				$prepends[] = $value;
+			} else {
+			$parsed[ $key ] = $value;
+		}
+	}
+
+	if ( ! empty( $prepends ) ) {
+		array_unshift( $parsed, ...$prepends );
+	}
+
+	foreach ( $unsets as $unset ) {
+		if ( is_array( $unset ) ) {
+			// This has been done in the previous iteration of the loop, when the parse_args was invoked recursively.
+			continue;
+		}
+
+		if ( $both_arrays_numeric && ! is_int( $unset ) ) {
+			$index = array_search( $unset, $parsed, true );
+			if ( $index ) {
+				unset( $parsed[ $index ] );
+			}
+		} elseif ( isset( $parsed[ $unset ] ) ) {
+			unset( $parsed[ $unset ] );
+		}
+	}
+
+	if ( $both_arrays_numeric && ! empty( $unsets ) ) {
+		$parsed = array_values( $parsed );
+	}
+
+	return $parsed;
+}
+```
+
+### Conclusion
+
+In scenarios requiring nuanced control over argument arrays, especially when dealing with nested structures, `parse_args` offers a robust solution beyond the capabilities of `wp_parse_args`. It's a testament to the flexibility PHP offers, allowing developers to extend or enhance existing functionalities to meet their specific project needs.

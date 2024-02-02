@@ -1,9 +1,10 @@
 import { Code } from 'bright';
-
-import theme from './theme';
 import { CodeSnippetProps } from '@/types';
 
+import theme from './theme';
+
 function CodeSnippet(props : CodeSnippetProps) {
+  // Build component.
   return (
     <Code
       {...props}

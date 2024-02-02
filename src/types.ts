@@ -1,3 +1,6 @@
+import { BrightProps } from "bright";
+import React from "react";
+
 export type Offer = {
 	contents: string,
 	name: string,
@@ -35,3 +38,11 @@ type Company = {
 export type SearchParams = {
 	[key: string]: string;
 };
+
+export interface CommonProps extends React.HTMLAttributes<HTMLElement> {
+	children?: React.ReactNode;
+}
+
+export interface CodeSnippetProps extends React.HTMLAttributes<HTMLPreElement> {
+	children?: React.ReactNode
+}

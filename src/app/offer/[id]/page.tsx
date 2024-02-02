@@ -3,12 +3,12 @@ import { Offer } from "@/types";
 
 type OfferProps = {
 	params: {
-		offerId: string | undefined
+		id: string | undefined
 	}
 };
 
 const Offer = async ({params} : OfferProps) => {
-	const job: Offer = await getJob(params.offerId ?? '');
+	const job: Offer = await getJob(params.id ?? '');
 	// Build component.
 	return (
 		<>

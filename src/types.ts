@@ -1,4 +1,3 @@
-import { BrightProps } from "bright";
 import React from "react";
 
 export type Offer = {
@@ -14,6 +13,15 @@ export type Offer = {
 	tags: string[],
 	refs: any,
 	company: Company,
+};
+
+export type PostFrontmatter = {
+	slug?: string,
+	title: string,
+	excerpt: string,
+	publishedOn: string,
+	authorAvatar: string,
+	authorName: string,
 };
 
 type Location = {

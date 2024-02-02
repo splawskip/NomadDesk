@@ -3,6 +3,7 @@ import path from 'path';
 import matter from 'gray-matter';
 import { cache } from 'react';
 import { notFound } from 'next/navigation';
+import { PostFrontmatter } from './types';
 
 export function excerptify(text: string = '', maxLength: number = 120): string {
 	const excerpt = text.replace(/(<([^>]+)>)/ig, '');
@@ -33,9 +34,9 @@ async function readDirectory(localPath: string): Promise<string[]> {
 	return fs.readdir(path.join(process.cwd(), localPath));
 }
 
-export const getBlogPosts = cache(async (): Promise<Array<{ slug: string; [key: string]: any }>> => {
+export const getBlogPosts = cache(async (): Promise<PostFrontmatter[]> => {
 	const fileNames = await readDirectory('/posts');
-	const blogPosts: Array<{ slug: string; [key: string]: any }> = [];
+	const blogPosts: PostFrontmatter[] = [];
 
 	for (let fileName of fileNames) {
 		const rawContent = await readFile(`/posts/${fileName}`);
@@ -43,17 +44,18 @@ export const getBlogPosts = cache(async (): Promise<Array<{ slug: string; [key: 
 
 		blogPosts.push({
 			slug: fileName.replace('.mdx', ''),
-			...frontmatter,
+			...(frontmatter as PostFrontmatter),
 		});
 	}
 
 	return blogPosts.sort((p1, p2) => (p1.publishedOn < p2.publishedOn ? 1 : -1));
 });
 
-export async function loadBlogPost(slug: string): Promise<{ frontmatter: any; content: string }> {
+export async function loadBlogPost(slug: string): Promise<{ frontmatter: PostFrontmatter; content: string }> {
 	try {
 		const rawContent = await readFile(`/posts/${slug}.mdx`);
-		const { data: frontmatter, content } = matter(rawContent);
+		const { data, content } = matter(rawContent);
+		const frontmatter = data as PostFrontmatter;
 		return { frontmatter, content };
 	} catch (error) {
 		notFound();

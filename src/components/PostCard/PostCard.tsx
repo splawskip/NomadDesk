@@ -8,28 +8,28 @@ const PostCard = ({slug, title, excerpt, publishedOn, authorAvatar, authorName} 
 	const href = `/post/${slug}`;
 	// Build component.
 	return (
-		<Link prefetch={true} href={href} className="card flex grow justify-start items-stretch">
-			<article className="card__body p-4 shadow-sm shadow-gray-400 dark:shadow-gray-800 bg-white-50 dark:bg-gray-800 rounded-lg flex flex-col justify-start items-start gap-4 relative outline-none focus-visible:ring ring-blue-500">
-			<Link href={href} className="text-xl font-semibold text-gray-950 dark:text-white-50">
-				{title}
-			</Link>
-			<p className="text-base text-gray-800 dark:text-white-200">
-				{excerpt}
-			</p>
-			<Link
-				href={href}
-				className='w-fit flex justify-start items-center gap-4 text-base text-gray-800 dark:text-white-200'
-				>
-				Continue reading{' '}
-				<span><ArrowRight></ArrowRight></span>
+		<article className="card flex justify-start items-stretch">
+			<div className="card__body p-4 shadow-sm shadow-gray-400 dark:shadow-gray-800 bg-white-50 dark:bg-gray-800 rounded-lg flex flex-col justify-start items-start gap-4 relative outline-none focus-visible:ring ring-blue-500">
+				<Link href={href} className="text-xl font-semibold text-gray-950 dark:text-white-50">
+					{title}
+				</Link>
+				<p className="text-base text-gray-800 dark:text-white-200">
+					{excerpt}
+				</p>
+				<Link
+					href={href}
+					className='w-fit flex justify-start items-center gap-4 text-base text-gray-800 dark:text-white-200'
+					>
+					Continue reading{' '}
+					<span><ArrowRight></ArrowRight></span>
 				</Link>
 				<div className='w-full flex gap-2 justify-start items-center text-sm text-gray-500 dark:text-white-300'>
-				<Image src={`/${authorAvatar}-avatar.webp`} height={40} width={40} alt='avatar' className='rounded-full'></Image>
-				<p>{authorName}</p>
-				<time dateTime={publishedOn} className="ml-auto">{publishedOn}</time>
+					<Image loading='lazy' src={`/${authorAvatar}-avatar.webp`} height={40} width={40} alt='avatar' className='rounded-full'></Image>
+					<p>{authorName}</p>
+					<time dateTime={publishedOn} className="ml-auto">{publishedOn}</time>
 				</div>
-			</article>
-		</Link>
+			</div>
+		</article>
 	  );
 };
 

@@ -7,6 +7,15 @@ type OfferProps = {
 	}
 };
 
+export async function generateMetadata({ params } : OfferProps) {
+	const job: Offer = await getJob(params.id ?? '');
+	// Build metadata.
+	return {
+	  title: `${job.name} - Job Offer  <- NomadDesk`,
+	  description: `Job Offer for ${job.name} on NomadDesk`,
+	};
+};
+
 const Offer = async ({params} : OfferProps) => {
 	const job: Offer = await getJob(params.id ?? '');
 	// Build component.

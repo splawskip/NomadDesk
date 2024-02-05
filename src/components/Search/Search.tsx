@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { Search as SearchIcon } from "react-feather";
-import VisuallyHidden from "../VisuallyHidden/VisuallyHidden";
+import VisuallyHidden from "../VisuallyHidden";
 import useInteractionOutsideRef from "@/hooks/interaction-outside-ref";
 
 const Search = () => {

@@ -4,7 +4,7 @@ import clsx from "clsx";
 import Link from "next/link";
 import { useId } from "react";
 import { ArrowLeft, ArrowRight } from "react-feather";
-import VisuallyHidden from "../VisuallyHidden/VisuallyHidden";
+import VisuallyHidden from "../VisuallyHidden";
 
 type PaginationProps = {
 	count?: number;

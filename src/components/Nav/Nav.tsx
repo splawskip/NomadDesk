@@ -6,7 +6,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useId, useState } from "react";
 import { Menu, X } from "react-feather";
-import VisuallyHidden from "../VisuallyHidden/VisuallyHidden";
+import VisuallyHidden from "../VisuallyHidden";
 
 const Nav = () => {
 	const pathname = usePathname();

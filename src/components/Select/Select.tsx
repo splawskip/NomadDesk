@@ -3,7 +3,7 @@
 import { useRouter, useSearchParams } from "next/navigation";
 import React, { useMemo, useState } from "react";
 import { Sliders } from "react-feather";
-import VisuallyHidden from "../VisuallyHidden/VisuallyHidden";
+import VisuallyHidden from "../VisuallyHidden";
 
 const Select = () => {
 	const router = useRouter();

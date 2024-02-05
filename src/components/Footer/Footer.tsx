@@ -1,5 +1,5 @@
 import Link from "next/link";
-import VisuallyHidden from "../VisuallyHidden/VisuallyHidden";
+import VisuallyHidden from "../VisuallyHidden";
 import { SOCIALS } from "@/constants";
 import { useId } from "react";
 import Image from "next/image";

@@ -4,7 +4,7 @@ import { useState } from "react";
 import Cookies from 'js-cookie';
 import { Moon, Sun } from "react-feather";
 import clsx from "clsx";
-import VisuallyHidden from "../VisuallyHidden/VisuallyHidden";
+import VisuallyHidden from "../VisuallyHidden";
 
 type ThemeToggleProps = {
 	initialTheme: string,

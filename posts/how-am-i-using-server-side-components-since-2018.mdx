@@ -1,0 +1,312 @@
+---
+title: 'How am I using Server Side Components since 2018!'
+excerpt: Let’s explore how I was able to use Server Side Components since 2018.
+publishedOn: '08-02-2024'
+authorName: Przemysław Spławski
+authorAvatar: psplawski
+---
+
+## React Server Side components are back to the good old PHP:
+
+In the ever-evolving world of web development, adapting and learning from different paradigms can significantly enhance how we approach our projects. Today, I'm delving into an intriguing parallel between PHP development and the modern React Server Components model. This exploration reveals not just the adaptability of PHP but also how traditional server-side scripting and cutting-edge frontend frameworks like React share fundamental concepts, especially when it comes to component-based architecture.
+
+## PHP (Server) Components:
+
+At the heart of React's popularity lies its component-based architecture, where UI elements are encapsulated within reusable components, each receiving props to dictate its functionality and appearance. Emulating this concept, our PHP framework introduces server components that accept arguments, similar to React's props, to dynamically render parts of a web application. Below is a detailed breakdown of a PHP server component designed to render a cookie banner component:
+
+### Namespace and security check
+
+The component starts with a namespace declaration, followed by a check to prevent direct script access. This is a security measure to ensure the script only runs within a controlled environment.
+We are using the same namespace for every component so PHP Autoloader package will autoload every component declared using this way.
+
+```php
+<?php
+/**
+ * Cookie Banner Layout One.
+ *
+ * @package Secret
+ */
+
+namespace Secret;
+
+// Prevent direct script access.
+if ( ! defined( 'ABSPATH' ) ) {
+    die( 'You shall not pass!' );
+}
+```
+
+### Function Definition and Argument (Props) Parsing:
+
+The component is declared in the same way how React does this these days.
+Function must follow this name convention: `render_{path_to_the_file_that_holds_the_component}_{file_name}`.
+Component accepts an $args array, akin to props in React.
+
+```php
+/**
+ * Blog > Module > Body > Grid.
+ *
+ * @param array $args Args for this part.
+ * @return array
+ */
+function render_blog_module_body_grid( $args = [] ) {
+	// some code here later.
+}
+```
+
+### Component Configuration and HTML Construction:
+
+Within the function, a builder object is instantiated, and default arguments are merged with provided ones using a custom parse_part function. The `parse_part` function parses incoming `$args` (props) against default `$args` of the component and attaches two hooks to the component. These two hooks when used allows us to attach some markup before and after main markup of the component. So `parse_part` do the same thing as `parse_args` but in addition attaches these two hooks. If you want learn more about `parse_args` function you co do it here -> [A Recursive Approach to Argument Parsing in PHP](https://nomad-desk.vercel.app/post/parse-args)
+
+```php
+/**
+ * Blog > Module > Body > Grid.
+ *
+ * @param array $args Args for this part.
+ * @return array
+ */
+function render_blog_module_body_grid( $args = [] ) {
+	// Get classes.
+	$builder = get_new( 'Builder' );
+	$module  = module_model();
+	// Gather animation classes.
+	$content_animation_classes = $module->resolve_animation_classes( 'content' );
+	// Parse args & prep data.
+	$out  = '';
+	$args = parse_part(
+		$args,
+		[
+			'row'    => [],
+			'column' => [
+				'wrap_classes'  => [ 'column-posts' ],
+				'size'          => '1of1',
+				'padding-sides' => 'null',
+			],
+			'grid'   => [
+				'in_classes' => [ $module->isotope_layout->classes ],
+				'posts'      => $module->posts,
+				'atts'       => [ 'data-layout' => $module->isotope_layout->type ],
+				'tile_args'  => [
+					'image_overlay_settings' => $module->images_overlay_settings,
+					'wrap_classes'           => [ $content_animation_classes->container_classes ],
+					'in_classes'             => [ $content_animation_classes->item_classes ],
+					'atts'                   => [
+						'data-animation'          => $module->animation_property( 'content', 'type' ),
+						'data-animation-duration' => $module->animation_property( 'content', 'duration' ),
+					],
+				],
+			],
+		],
+		__FUNCTION__
+	);
+ // some code here later.
+}
+```
+
+### The Builder class:
+
+The Builder class is the core part of our framework that is responsible for working with components. This class offers a lot of utilities related to components such us:
+
+1. Retrieving props used by the component
+2. Retrieving component markup
+3. Getters for common strings used in the project.
+4. Getter for common icons used in the project.
+5. The `render()` method which allows us to get and render our defined components.
+
+### The render method of the Builder class:
+
+This method accepts 3 arguments:
+
+1. Path to the component starting from the components directory
+2. Name of the file that holds the component.
+3. Array of args (props) that we want to pass to the component.
+
+**This is how using this method looks like:**
+
+```php
+/**
+ * Blog > Module > Body > Grid.
+ *
+ * @param array $args Args for this part.
+ * @return array
+ */
+function render_blog_module_body_grid( $args = [] ) {
+	// Get classes.
+	$builder = get_new( 'Builder' );
+	$module  = module_model();
+	// Gather animation classes.
+	$content_animation_classes = $module->resolve_animation_classes( 'content' );
+	// Parse args & prep data.
+	$out  = '';
+	$args = parse_part(
+		$args,
+		[
+			'row'    => [],
+			'column' => [
+				'wrap_classes'  => [ 'column-posts' ],
+				'size'          => '1of1',
+				'padding-sides' => 'null',
+			],
+			'grid'   => [
+				'in_classes' => [ $module->isotope_layout->classes ],
+				'posts'      => $module->posts,
+				'atts'       => [ 'data-layout' => $module->isotope_layout->type ],
+				'tile_args'  => [
+					'image_overlay_settings' => $module->images_overlay_settings,
+					'wrap_classes'           => [ $content_animation_classes->container_classes ],
+					'in_classes'             => [ $content_animation_classes->item_classes ],
+					'atts'                   => [
+						'data-animation'          => $module->animation_property( 'content', 'type' ),
+						'data-animation-duration' => $module->animation_property( 'content', 'duration' ),
+					],
+				],
+			],
+		],
+		__FUNCTION__
+	);
+	// If there is nothing to show bail.
+	if ( $module->posts->is_empty() ) {
+		return [ 'html' => $out, 'args' => $args ];
+	}
+	// Build part.
+	$out .= $builder->render( 'frame', 'row-start', $args['row'] );
+		$out .= $builder->render( 'frame', 'column-start', $args['column'] );
+			$out .= $builder->render( 'blog.elements', 'posts-grid', $args['grid'] );
+		$out .= $builder->render( 'frame', 'column-end', $args['column'] );
+	$out .= $builder->render( 'frame', 'row-end', $args['row'] );
+}
+```
+
+### The markup:
+
+It was clear for us that we won’t build new templating system like **Blade** or **JSX**. So we have decided that component markup will be represented as simple string, and `render` method will return component markup as string.
+
+### React is not our only inspiration:
+
+So here is the thing, React was not the only one inspiration for us. Our backend is structured just like **Laravel** apps. We have crafted our own **models** system, that works just like **Laravel** models. Model needs to be defined as class that extends `Model::class` in this scenario it will be called `Module_Blog`.  Inside model body, we define:
+
+1. Getters for the  model data.
+2. Option or Meta key from which model will read data.
+3. Aliases in case some of the model property or method need to be renamed.
+
+### Models:
+
+As we now know what models are inside our framework, it’s time to clarify what `module_model()` does! We have created helpers that returns instance of currently processed model so we got:
+
+1. `module_model()` -> Returns currently processed module model. (Modules are sections which can be displayed on the homepage and other pages.)
+2. `widget_model()` -> Return currently processed widget model. (Widgets are small components displayed in the sidebar or in the Widgets Module)
+3. `page_model()` -> Return currently processed page model. (This is self-explanatory)
+
+So in the code example above, currently processed model is the `module_blog` model, as we are rendering blog posts grid for `Blog Module` component.
+
+### Component output:
+
+Components in our framework should return associative array which must look like this:
+
+```php
+return [
+	'html' => $out, // HTML markup of the component represented as string.
+	'args' => $args, // Args (props) used by the component.
+];
+```
+
+### Complete component file:
+
+🎉 Here is our whole component:
+
+```php
+<?php
+/**
+ * Blog > Module > Body > Grid.
+ *
+ * @package Secret
+ */
+
+namespace Secret;
+
+// Prevent direct script access.
+if ( ! defined( 'ABSPATH' ) ) {
+	die( 'You shall not pass!' );
+}
+
+/**
+ * Blog > Module > Body > Grid.
+ *
+ * @param array $args Args for this part.
+ * @return array
+ */
+function render_blog_module_body_grid( $args = [] ) {
+	// Get classes.
+	$builder = get_new( 'Builder' );
+	$module  = module_model();
+	// Gather animation classes.
+	$content_animation_classes = $module->resolve_animation_classes( 'content' );
+	// Parse args & prep data.
+	$out  = '';
+	$args = parse_part(
+		$args,
+		[
+			'row'    => [],
+			'column' => [
+				'wrap_classes'  => [ 'column-posts' ],
+				'size'          => '1of1',
+				'padding-sides' => 'null',
+			],
+			'grid'   => [
+				'in_classes' => [ $module->isotope_layout->classes ],
+				'posts'      => $module->posts,
+				'atts'       => [ 'data-layout' => $module->isotope_layout->type ],
+				'tile_args'  => [
+					'image_overlay_settings' => $module->images_overlay_settings,
+					'wrap_classes'           => [ $content_animation_classes->container_classes ],
+					'in_classes'             => [ $content_animation_classes->item_classes ],
+					'atts'                   => [
+						'data-animation'          => $module->animation_property( 'content', 'type' ),
+						'data-animation-duration' => $module->animation_property( 'content', 'duration' ),
+					],
+				],
+			],
+		],
+		__FUNCTION__
+	);
+	// If there is nothing to show bail.
+	if ( $module->posts->is_empty() ) {
+		return [ 'html' => $out, 'args' => $args ];
+	}
+	// Build part.
+	$out .= $builder->render( 'frame', 'row-start', $args['row'] );
+		$out .= $builder->render( 'frame', 'column-start', $args['column'] );
+			$out .= $builder->render( 'blog.elements', 'posts-grid', $args['grid'] );
+		$out .= $builder->render( 'frame', 'column-end', $args['column'] );
+	$out .= $builder->render( 'frame', 'row-end', $args['row'] );
+	// Return.
+	return [ 'html' => $out, 'args' => $args ];
+}
+```
+
+## Best from many words:
+
+### React:
+
+What we got from React, is the components based frontend structure, way of building app markup, code splitting into smaller chunks (components). Other similarities to React are $args which are basically the same thing as React props and hooks. Hooks in React allows us to execute some action on the certain moment of the component execution or do some stuff outside React boundaries  etc. In our framework we have build a lot of custom hooks which allows us to do the same thing.
+
+### Laravel:
+
+What we got from Laravel, is the backend structure. We have built our backends in the very similar way how Laravel apps are build, we have created our own models system. Besides models rest of backend of our app is structured as MVC architecture which heavily uses OOP.
+
+### NEXT.JS:
+
+From NEXT.JS we got components that are build and rendered on the server.
+
+## Conclusion:
+
+In reflecting on the journey of integrating Server Side Components since 2018, it becomes clear that the synthesis of old and new web development practices offers a unique and powerful pathway for building modern web applications. By drawing on the foundational principles of old PHP server-side rendering and combining them with the innovative, component-based architecture of React and NEXT.JS, we've managed to carve out a development methodology that respects the past while firmly looking towards the future.
+
+From the old PHP server-side world, we've gained invaluable insights into the importance of server-rendered markup, which has stood the test of time for its efficiency, SEO benefits, and overall reliability. These practices have allowed us to ensure that our applications are fast, accessible, and robust, laying a solid foundation upon which we can build.
+
+On the other hand, the modern world of React and NEXT.JS has introduced us to the future of web development, emphasizing component-based architecture, seamless user experiences, and a more intuitive way of building applications. This approach has not only improved the scalability and maintainability of our projects but has also significantly enhanced the developer experience, making it easier to conceptualize, develop, and deploy complex web applications.
+
+Interestingly, React and NEXT.JS Server Components are, in a way, a nod to the past, embracing server-side rendered markup's proven benefits while leveraging the modern web's power and flexibility. This blend of old and new practices underscores the cyclical nature of technology evolution, where innovative solutions often find their roots in established methodologies.
+
+Developing this hybrid model has been both a fun and challenging task, pushing the boundaries of what I thought was possible and allowing me to learn a great deal in the process. The experience of integrating these different paradigms has been deeply rewarding, offering a fresh perspective on the future of web development.
+
+As I look forward, my experiences with React and NEXT.JS confirm my belief that this is the future of web development. The blend of server-side logic with client-side dynamism offers the best of both worlds, enabling developers to build more efficient, interactive, and user-friendly applications. While the journey of using Server Side Components since 2018 has been a bridge between the past and the future, it is clear that the path forward lies in the innovative capabilities of React and NEXT.JS. Embracing these technologies will continue to drive the web development industry forward, offering new possibilities and challenges that I am eager to explore.

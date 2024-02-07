@@ -46,12 +46,15 @@ const MDXRemoteWrapper = (props : MDXRemoteProps) => {
 			</ul>
 		),
 		ol: (props: CommonProps) => (
-			<ol {...props} className="text-base mt-4 text-gray-800 dark:text-white-200">
+			<ol {...props} className="list-decimal ml-5 text-base mt-4 text-gray-800 dark:text-white-200">
 				{props.children}
 			</ol>
 		),
 		pre: (props:CodeSnippetProps) => (
 			<CodeSnippet {...props} className="max-w-full">{props.children}</CodeSnippet>
+		),
+		a: (props: CommonProps) => (
+			<a {...props} className="link text-base mt-4 text-blue-500">{props.children}</a>
 		),
 	};
 	// Build component.

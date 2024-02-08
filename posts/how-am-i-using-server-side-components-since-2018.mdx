@@ -8,11 +8,15 @@ authorAvatar: psplawski
 
 ## React Server Side components are back to the good old PHP:
 
-In the ever-evolving world of web development, adapting and learning from different paradigms can significantly enhance how we approach our projects. Today, I'm delving into an intriguing parallel between PHP development and the modern React Server Components model. This exploration reveals not just the adaptability of PHP but also how traditional server-side scripting and cutting-edge frontend frameworks like React share fundamental concepts, especially when it comes to component-based architecture.
+In the ever-evolving world of web development, adapting and learning from different paradigms can significantly enhance how we approach our projects.
+Today, I'm delving into an intriguing parallel between PHP development and the modern React Server Components model.
+This exploration reveals not just the adaptability of PHP but also how traditional server-side scripting and cutting-edge frontend frameworks like React share fundamental concepts, especially when it comes to component-based architecture.
 
 ## PHP (Server) Components:
 
-At the heart of React's popularity lies its component-based architecture, where UI elements are encapsulated within reusable components, each receiving props to dictate its functionality and appearance. Emulating this concept, our PHP framework introduces server components that accept arguments, similar to React's props, to dynamically render parts of a web application. Below is a detailed breakdown of a PHP server component designed to render a cookie banner component:
+At the heart of React's popularity lies its component-based architecture, where UI elements are encapsulated within reusable components, each receiving props to dictate its functionality and appearance.
+Emulating this concept, our PHP framework introduces server components that accept arguments, similar to React's props, to dynamically render parts of a web application.
+Below is a detailed breakdown of a PHP server component designed to render a blog posts grid component:
 
 ### Namespace and security check
 
@@ -38,7 +42,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 ### Function Definition and Argument (Props) Parsing:
 
 The component is declared in the same way how React does this these days.
-Function must follow this name convention: `render_{path_to_the_file_that_holds_the_component}_{file_name}`.
+
+Function must follow this name convention:
+
+```php
+render_{path_to_the_file_that_holds_the_component}_{file_name}
+```
+
 Component accepts an $args array, akin to props in React.
 
 ```php

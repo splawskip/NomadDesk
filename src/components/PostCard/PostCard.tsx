@@ -23,7 +23,7 @@ const PostCard = ({slug, title, excerpt, publishedOn, authorAvatar, authorName} 
 					Continue reading{' '}
 					<span><ArrowRight></ArrowRight></span>
 				</Link>
-				<div className='w-full flex gap-2 justify-start items-center text-sm text-gray-500 dark:text-white-300'>
+				<div className='mt-auto w-full flex gap-2 justify-start items-center text-sm text-gray-500 dark:text-white-300'>
 					<Image loading='lazy' src={`/${authorAvatar}-avatar.webp`} height={40} width={40} alt='avatar' className='rounded-full'></Image>
 					<p>{authorName}</p>
 					<time dateTime={publishedOn} className="ml-auto">{publishedOn}</time>

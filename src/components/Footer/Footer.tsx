@@ -19,7 +19,7 @@ const Footer = () => {
 			<ul className="flex gap-4 justify-between items-center flex-wrap">
 				{SOCIALS.map(({name, url, Icon}) => {
 					return (
-						<li key={`${id}-${name}`} className="transition-colors hover:text-nomadic-sand-300 focus-within:ring ring-blue-500">
+						<li key={`${id}-${name}`} className="hover:text-nomadic-sand-300 focus-within:ring ring-blue-500">
 						<a className="outline-none" href={url} rel="noopener noreferrer" target="_blank">
 							<Icon/>
 							<VisuallyHidden>{name}</VisuallyHidden>

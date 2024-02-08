@@ -81,7 +81,7 @@ const Search = () => {
 			<SearchIcon className="text-gray-950 dark:text-white-50"></SearchIcon>
 			<input ref={searchInputRef} type="search" placeholder="Search" className="bg-transparent grow outline-none" value={query} onChange={handleChangeOnInput} />
 			{hasSuggestions && (
-				<ul className="transition-colors absolute max-h-72 overflow-y-scroll border-2 border-white-200 top-suggestions right-0 left-0 p-6 flex gap-3 flex-col justify-start items-start rounded-3xl shadow-white-950/50 bg-white-50 dark:bg-gray-800 dark:border-gray-700">
+				<ul className="absolute max-h-72 overflow-y-scroll border-2 border-white-200 top-suggestions right-0 left-0 p-6 flex gap-3 flex-col justify-start items-start rounded-3xl shadow-white-950/50 bg-white-50 dark:bg-gray-800 dark:border-gray-700">
 					{suggestions.map((suggestion) => (
 							<Link prefetch={true} key={suggestion} href={`/?category=${suggestion}`} className="link w-full px-4 py-1 rounded-3xl outline-none focus-visiblen:ring ring-blue-500 focus-visible:bg-white-100 hover:bg-white-100 dark:focus-visible:bg-gray-950 dark:hover:bg-gray-950" onClick={() => setSuggestions([])}>
 								<li className="w-full">{suggestion}</li>

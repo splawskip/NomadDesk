@@ -57,6 +57,29 @@ Flexbox provides several properties to align items both vertically and horizonta
 }
 ```
 
+### Aligning Content:
+
+The align-content property aligns a flex container's lines within the flex container when there is extra space in the cross-axis, similar to how justify-content aligns individual items within the main axis. This property has no effect when items are in a single line but plays a crucial role in multi-line flex containers.
+
+**NOTE**: This property only takes effect on multi-line flexible containers, where flex-wrap is set to either wrap or wrap-reverse). A single-line flexible container (i.e. where flex-wrap is set to its default value, no-wrap) will not reflect align-content.
+
+```css
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: space-around; /* Space distribution between lines */
+}
+```
+
+Options for align-content include:
+
+- `flex-start`: lines packed to the start of the container.
+- `flex-end`: lines packed to the end of the container.
+- `center`: lines centered in the container.
+- `space-between`: lines evenly distributed; the first line is at the start of the container while the last one is at the end.
+- `space-around`: lines evenly distributed with equal space around each line.
+- `stretch`: lines stretch to take up the remaining space.
+
 ## Distributing Space:
 
 The `flex-grow`, `flex-shrink`, and `flex-basis` properties give you control over how items grow or shrink to fill the available space in the container.

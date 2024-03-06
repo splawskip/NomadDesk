@@ -39,6 +39,7 @@ const config: Config = {
 		},
 		spacing: {
 			'suggestions': 'calc(100% + .75rem)',
+			'select-control': 'calc(50% - .5rem)',
 		},
     },
   },

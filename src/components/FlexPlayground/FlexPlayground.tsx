@@ -74,7 +74,7 @@ const FlexPlayground = () => {
         ))}
       </div>
 		{/** Controls. */}
-      <div className={'flex flex-col gap-4 flex-wrap justify-between'}>
+      <div className={'flex gap-4 flex-wrap justify-start items-center max-w-96'}>
 		{/** Flex Direction */}
         <SelectControl
           label="flex-direction"
@@ -146,12 +146,13 @@ function SelectControl({ label, value, onChange, ...delegated } : SelectControlP
   const id = useId();
   // Spit it out.
   return (
-    <div className={'flex flex-col justify-center items-start gap-2'}>
+    <div className={'flex flex-col justify-center items-start gap-2 w-full md:w-select-control'}>
       <label htmlFor={id} className='text-gray-950 dark:text-white-50'>
 		{label}
 	 </label>
       <select
-        className={'flex grow justify-start items-center gap-2 border-2 border-transparent outline-none focus-visible:ring ring-blue-500 rounded-3xl p-2 bg-white-50 dark:bg-gray-950 text-gray-950 dark:text-white-50 w-full px-2 appearance-none'}
+        id={id}
+        className={'flex grow justify-start items-center gap-2 border-2 border-transparent outline-none focus-visible:ring ring-blue-500 rounded-3xl p-2 bg-white-50 dark:bg-gray-950 text-gray-950 dark:text-white-50 w-full appearance-none cursor-pointer'}
         value={value}
         onChange={onChange}
         {...delegated}

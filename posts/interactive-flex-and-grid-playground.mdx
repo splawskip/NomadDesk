@@ -1,0 +1,112 @@
+---
+title: Interactive Flexbox positioning playground
+excerpt: Learn how CSS Flexbox can be used to position elements inside flex container by using interactive flexbox playground.
+publishedOn: '08-02-2024'
+authorName: Przemysław Spławski
+authorAvatar: psplawski
+---
+
+# Understanding CSS Flexbox: A Guide to Positioning Elements
+
+Flexbox is a powerful layout model in CSS that allows you to design complex layouts with ease. It's designed to provide a more efficient way to lay out, align, and distribute space among items in a container, even when their size is unknown or dynamic. In this post, we'll explore how to use Flexbox to position elements inside a flex container, enhancing your web design skills.
+
+## What is Flexbox?
+
+Flexbox, or the Flexible Box Layout, is a one-dimensional layout method for laying out items in rows or columns. Items expand to fill additional space or shrink to fit into smaller spaces. This makes it a great tool for responsive design.
+
+## Getting Started with Flexbox:
+
+To start using Flexbox, you first need to define a flex container. This is done by setting an element's display property to `flex` or `inline-flex`.
+
+```css
+.container {
+  display: flex;
+}
+```
+
+This simple line of code turns the children of the `.container` element into flex items, which are laid out in a row by default.
+
+## Controlling the Direction:
+
+Flexbox gives you control over the direction items are laid out through the `flex-direction` property. The options are:
+
+- `row` (default): left to right in `ltr`; right to left in `rtl`
+- `row-reverse`: opposite of `row`
+- `column`: top to bottom
+- `column-reverse`: bottom to top
+
+```css
+.container {
+  display: flex;
+  flex-direction: column;
+}
+```
+
+## Aligning Items:
+
+Flexbox provides several properties to align items both vertically and horizontally:
+
+- `justify-content`: aligns items on the main axis (for example, left-to-right, right-to-left, top-to-bottom, etc.).
+- `align-items`: aligns items on the cross axis (perpendicular to the main axis).
+
+```css
+.container {
+  display: flex;
+  justify-content: center; /* Center items horizontally */
+  align-items: center; /* Center items vertically */
+}
+```
+
+## Distributing Space:
+
+The `flex-grow`, `flex-shrink`, and `flex-basis` properties give you control over how items grow or shrink to fill the available space in the container.
+
+- `flex-grow`: defines the ability for a flex item to grow if necessary.
+- `flex-shrink`: defines the ability for a flex item to shrink if necessary.
+- `flex-basis`: defines the default size of an element before the remaining space is distributed.
+
+You can shorthand these properties into the `flex` property:
+
+```css
+.item {
+  flex: 1 1 auto; /* grow | shrink | basis */
+}
+```
+
+## Wrapping Items:
+
+Sometimes you want to allow items to wrap onto multiple lines instead of stretching them to fit on a single line. The `flex-wrap` property controls this:
+
+```css
+.container {
+  display: flex;
+  flex-wrap: wrap;
+}
+```
+
+## Example:
+
+Here's a simple Flexbox layout:
+
+```css
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.item {
+  flex: 0 1 auto;
+}
+```
+
+In this example, `.container` will lay out its children (`.item`) to justify the space between them and align them in the center vertically.
+
+## Conclusion:
+
+Flexbox is an incredibly versatile tool for web developers, making it simpler to design layouts that adapt to the screen size and content changes. By mastering Flexbox, you'll be able to create more responsive, flexible layouts without having to rely heavily on floats or positioning.
+
+
+## Interactive Flexbox positioning playground:
+
+<FlexPlayground />

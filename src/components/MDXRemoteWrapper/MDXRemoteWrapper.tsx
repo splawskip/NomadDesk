@@ -1,6 +1,7 @@
 import { CodeSnippetProps, CommonProps } from '@/types';
 import CodeSnippet from '../CodeSnippet';
 import { MDXRemote, MDXRemoteProps } from 'next-mdx-remote/rsc';
+import FlexPlayground from '../FlexPlayground';
 
 const MDXRemoteWrapper = (props : MDXRemoteProps) => {
 	// Gather MDX components styled using Tailwind.
@@ -61,6 +62,10 @@ const MDXRemoteWrapper = (props : MDXRemoteProps) => {
 				{props.children}
 			</li>
 		),
+		FlexPlayground: (props: CommonProps) => (
+			<FlexPlayground>
+			</FlexPlayground>
+		)
 	};
 	// Build component.
 	return (
